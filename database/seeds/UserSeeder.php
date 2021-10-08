@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
      	for ($i=0; $i < 5 ; $i++) { 
      		
      		DB::table('users')->insert([
-    			'id_users' => Str::uuid(),
+    			// 'id_users' => Str::uuid(),
     			'username' => $faker->name,
     			'email' => $faker->email,
     			'password' => Hash::make('12345')

@@ -4,33 +4,54 @@ namespace Tests\Feature\Http\Controllers;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Hash;
+use App\Models\{Absen, Users};
+use Illuminate\Support\Str;
 use Tests\TestCase;
-use App\Models\Absen;
-// use Illuminate\Foundation\Testing\WithFaker;
 
 class AbsenControllerTest extends TestCase
 {
     use WithFaker;
+    use RefreshDatabase;
 
     /**
      * @test
      */
     public function it_stores_data()
     {
-        $absen = Absen::factory(50);
-        print_r($absen); die;
+        $absen = factory(Absen::class)->create();
         $response = $this->actingAs($absen)
-            ->post('/permits', [
-                'id_absen' => Str::uuid(),
-                'fk_id_users' => '36acd0d4-886e-4e84-80d1-5de0f1455a1c',
-                'nama_user' => $faker->name,
-                'masuk' => 0,
-                'telat' => 0,
-                'izin' => 0,
-                'keterangan' => 'izin masuk',
-                'tanggal_izin' => ['2021-09-01'],
+            ->post('/api/permits', [
+                  // 'id_absen'      => Str::uuid(),
+                  // 'fk_id_users'   => 1,
+                  'nama_user'     => $this->faker->name,
+                  'izin'          => 1,
+                  'keterangan'    => 'Izin',
+                  'tanggal_izin'  => "[\"2021-09-12\",\"2021-09-11\",\"2021-09-13\"]",
+                  'deleted_at'    => 0,
+                  'created_at'    => date('Y-m-d H:s:i')
             ]);
 
+        $response->assertStatus(200);
+    }
+
+    /**
+    * @test
+    */
+    public function it_get_all()
+    {
+
+        $response = $this->call('GET', '/api/permits');
+        $response->assertStatus(200);
+    }
+
+    /**
+    * @test
+    */
+    public function it_by_id()
+    {
+        
+        $response = $this->call('GET', '/api/permits/{id}');
         $response->assertStatus(200);
     }
 }

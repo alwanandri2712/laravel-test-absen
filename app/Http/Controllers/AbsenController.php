@@ -29,12 +29,10 @@ class AbsenController extends Controller
 		try {
 
 			$validatorAbsen = Validator::make($request->all(), [
-	            'izin' 			=> 'required',
-			    'keterangan' 	=> 'required',
 			    'fk_id_users' 	=> 'required',
 			    'nama_user' 	=> 'required',
-			    'izin' 			=> 'required',
-			    'masuk' 		=> 'nullable',
+	            'izin' 			=> 'required',
+			    'keterangan' 	=> 'required',
 			    'tanggal_izin'  => 'required',
 	        ]);
 
@@ -51,7 +49,7 @@ class AbsenController extends Controller
 			}
 
 	        $dataValidate['tanggal_izin'] = json_encode($tmpung_tngl_izin); 
-	        $dataValidate['id_absen'] = Str::uuid(); 
+	        // $dataValidate['id_absen'] = Str::uuid(); 
 	        $dataValidate['deleted_at'] = 0; 
 	        $dataValidate['created_at'] = date('Y-m-d H:s:i'); 
 			$result = Absen::insert($dataValidate);

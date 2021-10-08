@@ -14,19 +14,19 @@ class CreateAbsenTable extends Migration
     public function up()
     {
         Schema::create('absen', function (Blueprint $table) {
-            $table->string('id_absen');
-            $table->string('fk_id_users')->references('id_users')->on('users');
+            $table->id('id_absen');
+            $table->unsignedBigInteger('fk_id_users')->nullable();
             $table->string('nama_user')->nullable();
             $table->integer('masuk')->nullable();
             $table->integer('telat')->nullable();
             $table->integer('izin')->nullable();
             $table->text('keterangan')->nullable();
-            $table->date('tanggal')->nullable();
-            $table->text('tanggal_2')->nullable();
+            $table->text('tanggal_izin')->nullable();
             $table->time('waktu_absen')->nullable();
             $table->time('waktu_absen_keluar')->nullable();
-            $table->softDeletes('deleted_at', 0);
+            $table->string('deleted_at')->nullable();
             $table->timestamps();
+            $table->foreign('fk_id_users')->references('id_users')->on('users')->onDelete('cascade');
         });
     }
 
