@@ -11,20 +11,29 @@ use Tests\TestCase;
 
 class AbsenControllerTest extends TestCase
 {
-    use WithFaker;
-    use RefreshDatabase;
+    /*use WithFaker;
+    use RefreshDatabase;*/
+
+    /**
+     * @test
+     */
+    public function it_stores_data_users()
+    {
+        factory(\App\Models\Users::class, 3)->create();
+        /*$response = $this->actingAs($users);
+        $response->assertStatus(200);*/
+    }
 
     /**
      * @test
      */
     public function it_stores_data()
     {
-        $absen = factory(Absen::class)->create();
+        $absen = factory(\App\Models\Absen::class)->create();
         $response = $this->actingAs($absen)
             ->post('/api/permits', [
-                  // 'id_absen'      => Str::uuid(),
-                  // 'fk_id_users'   => 1,
-                  'nama_user'     => $this->faker->name,
+                  'fk_id_users'   => 1,
+                  // 'nama_user'     => $this->faker->name,
                   'izin'          => 1,
                   'keterangan'    => 'Izin',
                   'tanggal_izin'  => "[\"2021-09-12\",\"2021-09-11\",\"2021-09-13\"]",
@@ -34,6 +43,7 @@ class AbsenControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
+
 
     /**
     * @test

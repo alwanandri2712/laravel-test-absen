@@ -19,15 +19,11 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Absen::class, function (Faker $faker) {
+$factory->define(Users::class, function (Faker $faker) {
     return [
-        // 'id_absen'  	=> Str::uuid(),
-        // 'fk_id_users'	=> 1,
-        'nama_user' 	=> $faker->name,
-        'izin' 			=> 1,
-        'keterangan'  	=> 'Izin',
-        'masuk'  		=> 0,
-        'tanggal_izin'  => "[\"2021-09-12\",\"2021-09-11\",\"2021-09-13\"]",
+    	'username' => $faker->name,
+    	'email'    => $faker->email,
+    	'password' => Hash::make('1234'),
     ];
 });
 

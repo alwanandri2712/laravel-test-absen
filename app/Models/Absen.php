@@ -13,7 +13,7 @@ class Absen extends Model implements Authenticatable{
     protected $primaryKey = "id_absen";
     protected $table = "absen";
     // protected $fillable = ['id_absen', 'fk_id_users', 'nama_user', 'masuk', 'izin', 'keterangan', 'tanggal', 'waktu_absen', 'waktu_keluar'];
-    protected $fillable = ['nama_user', 'keterangan'];
+    protected $fillable = ['fk_id_users', 'nama_user', 'keterangan', 'tanggal_izin', 'deleted_at', 'created_at'];
 
     public function user()
     {
