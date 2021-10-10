@@ -20,6 +20,7 @@ class AbsenControllerTest extends TestCase
     public function it_stores_data_users()
     {
         factory(\App\Models\Users::class, 3)->create();
+        $this->assertTrue(true);
         /*$response = $this->actingAs($users);
         $response->assertStatus(200);*/
     }
